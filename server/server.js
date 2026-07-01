@@ -28,12 +28,18 @@ if (publicVapidKey && privateVapidKey) {
   );
 }
 
-// Database Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/wrapdb')
-  .then(() => {
-    console.log('MongoDB Connected');
-  })
-  .catch(err => console.error('MongoDB Connection Error:', err));
+// Database Connection Middleware for Serverless
+const connectDB = require('./config/db');
+
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        console.error('Failed to connect to database in middleware:', err.message);
+        res.status(500).json({ msg: 'Database connection failed. Please check your MONGO_URI and Network Access settings.', error: err.message });
+    }
+});
 
 // Serve static assets if in production (or just always for this fix)
 app.use(express.static(path.join(__dirname, '../client/dist')));
