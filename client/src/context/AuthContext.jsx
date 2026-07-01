@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
         try {
             axios.defaults.headers.common['x-auth-token'] = token;
-            const res = await axios.get('http://127.0.0.1:5000/api/auth/user');
+            const res = await axios.get('/api/auth/user');
             setUser(res.data);
         } catch (err) {
             localStorage.removeItem('token');
@@ -28,13 +28,13 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async (username, password) => {
-        const res = await axios.post('http://127.0.0.1:5000/api/auth/login', { username, password });
+        const res = await axios.post('/api/auth/login', { username, password });
         localStorage.setItem('token', res.data.token);
         await loadUser();
     };
 
     const register = async (username, password, email) => {
-        const res = await axios.post('http://127.0.0.1:5000/api/auth/signup', { username, password, email });
+        const res = await axios.post('/api/auth/signup', { username, password, email });
         localStorage.setItem('token', res.data.token);
         await loadUser();
     };

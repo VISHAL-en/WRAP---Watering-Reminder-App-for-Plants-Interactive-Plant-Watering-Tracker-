@@ -18,7 +18,7 @@ const RealPlantsPage = () => {
 
     const fetchPlants = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/real-plants', {
+            const res = await fetch('/api/real-plants', {
                 headers: { 'x-auth-token': localStorage.getItem('token') }
             });
             const data = await res.json();
@@ -33,7 +33,7 @@ const RealPlantsPage = () => {
     const handleCreatePlant = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/real-plants', {
+            const res = await fetch('/api/real-plants', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ const RealPlantTimelinePage = () => {
 
     const fetchPlantData = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/real-plants/${id}`, {
+            const res = await fetch(`/api/real-plants/${id}`, {
                 headers: { 'x-auth-token': localStorage.getItem('token') }
             });
             if (res.ok) {
@@ -53,7 +53,7 @@ const RealPlantTimelinePage = () => {
         formData.append('watered', wateredToday);
 
         try {
-            const res = await fetch(`http://localhost:5000/api/real-plants/${id}/logs`, {
+            const res = await fetch(`/api/real-plants/${id}/logs`, {
                 method: 'POST',
                 headers: {
                     'x-auth-token': localStorage.getItem('token')
@@ -223,7 +223,7 @@ const RealPlantTimelinePage = () => {
                                             </div>
                                             
                                             <img 
-                                                src={`http://localhost:5000${log.imageUrl}`} 
+                                                src={`${log.imageUrl}`} 
                                                 alt="Plant Log" 
                                                 style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} 
                                             />

@@ -30,7 +30,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const res = await axios.get('http://127.0.0.1:5000/api/water/history');
+                const res = await axios.get('/api/water/history');
                 setHistory(res.data);
             } catch (err) {
                 console.error(err);
@@ -45,7 +45,7 @@ const Profile = () => {
 
     const saveName = async () => {
         try {
-            await axios.put('http://127.0.0.1:5000/api/auth/username', { username: editName });
+            await axios.put('/api/auth/username', { username: editName });
             await loadUser(); // Refresh user data
             setIsEditingName(false);
         } catch (err) {
@@ -71,7 +71,7 @@ const Profile = () => {
             const formData = new FormData();
             formData.append('profilePic', croppedImageBlob, 'profile.jpg');
 
-            const res = await axios.post('http://127.0.0.1:5000/api/user/upload', formData, {
+            const res = await axios.post('/api/user/upload', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -87,7 +87,7 @@ const Profile = () => {
     const deleteProfilePic = async () => {
         if (!confirm('Are you sure you want to remove your profile picture?')) return;
         try {
-            await axios.delete('http://127.0.0.1:5000/api/user/profile-pic');
+            await axios.delete('/api/user/profile-pic');
             setProfilePic('');
         } catch (err) {
             console.error(err);
@@ -138,7 +138,7 @@ const Profile = () => {
                 applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
             });
 
-            await axios.post('http://127.0.0.1:5000/api/subscribe', subscription);
+            await axios.post('/api/subscribe', subscription);
             setIsSubscribed(true);
             alert('Notifications enabled! You will receive daily reminders at 9 AM.');
         } catch (err) {

@@ -51,7 +51,7 @@ const PlantPage = () => {
             const minAnimationTime = 1500;
             const start = Date.now();
 
-            await axios.post('http://127.0.0.1:5000/api/water');
+            await axios.post('/api/water');
 
             const remainingTime = minAnimationTime - (Date.now() - start);
 
